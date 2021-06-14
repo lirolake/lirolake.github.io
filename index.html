@@ -1,146 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>lirolake (Liam)</title>
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
-  <style>
-    html {
-      color: #fff;
-      background: url("bg.jpg") top center no-repeat;
-      background-size: cover;
-      position: fixed;
-    }
-    body {
-      height: 100vh;
-      width: 100vw;
-      background: rgba(19, 19, 19, 0.6);
-    }
-    a {
-      color: #eee;
-      text-decoration: underline;
-    }
-    a:hover {
-      color: #eee;
-    }
-    #header {
-      position: relative;
-      width: 100%;
-      padding: 100px 0;
-    }
-    #header h1 {
-      margin: 30px 0 10px 0;
-      font-size: 48px;
-      font-weight: 700;
-      line-height: 56px;
-      color: #fff;
-    }
-    
-    #header h2 {
-      color: #eee;
-      margin: 30px 0;
-      font-size: 22px;
-    }
-    
-    #header .countdown div {
-      text-align: center;
-      margin: 10px;
-      width: 100px;
-      padding: 15px 0;
-      color: #FFF;
-      background: rgba(255, 255, 255, 0.3);
-      border-top: 5px solid #FF0000;
-    }
-    
-    #header .countdown div h3 {
-      font-weight: 700;
-      font-size: 44px;
-      margin-bottom: 15px;
-    }
-    
-    #header .countdown div h4 {
-      font-size: 16px;
-      font-weight: 600;
-    }
-    
-    .social-links {
-      margin: 30px 0;
-    }
-    
-    @media (max-width: 575px) {
-      #header h1 {
-        margin: -30px 0 5px;
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liam "lirolake"</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: "Ubuntu", sans-serif;
+        box-sizing: border-box;
+        text-decoration: none;
       }
-      .social-links {
-        margin: -10px 0 5px;
+      body {
+        height: 100vh;
+        background: url(bg.jpg) no-repeat center;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
-      #header .countdown div {
-        width: 70px;
-        padding: 10px 0;
-        margin: 10px 8px;
+      .profile-card {
+        width: 500px;
+        text-align: center;
+        border-radius: 8px;
+        overflow: hidden;
       }
-      #header .countdown div h3 {
+      .card-header {
+        background: #2c3a47;
+        padding: 60px 40px;
+      }
+      .pic {
+        display: inline-block;
+        padding: 8px;
+        background: #e66767;
+        margin: auto;
+        border-radius: 50%;
+      }
+      .pic img {
+        display: block;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+      }
+      .name {
+        color: #f2f2f2;
         font-size: 28px;
-        margin-bottom: 10px;
+        font-weight: 600;
+        margin: 20px 0;
       }
-      #header .countdown div h4 {
-        font-size: 14px;
-        font-weight: 500;
+      .desc {
+        font-size: 18px;
+        color: #e66767;
+        margin: 20px 0;
       }
-    }
-    
-
-    .social-links a, .social-links p {
-      color: #FFF;
-      display: inline-block;
-      text-align: center;
-      padding:10px;
-      font-size: 1.5em;
-    }
-    
-    .social-links a i {
-      padding: 10px;
-      border-radius: 50%;
-    }
-    
-    .social-links a:hover i {
-      color: #F00;
-      background-color: #FFF;
-    }
-    
-    #footer {
-      padding: 10px 0;
-      color: #fff;
-      font-size: 14px;
-      width:100vw;
-      bottom: 0;
-      position: fixed;
-      text-align: center;
-    }
-  </style>
-</head>
-<body>
-  <header id="header" class="d-flex align-items-center">
-    <div class="container d-flex flex-column align-items-center text-center">
-      <h1>lirolake <span style="color:red;font-style:italic;">(Liam)</span></h1>
-      <h2>Technical Director - <a href="https://www.statuseffect.co/" style="color:red;" target="_blank">Status Effect</a><br />First Class Honours BSc Computer Security - <a href="https://www.southwales.ac.uk/" style="color:red;" target="_blank">University of South Wales</a></h2>
-      <div class="social-links text-center">
-        <a href="https://www.twitter.com/lirolake" target="_blank"><i class="fab fa-twitter"></i></a>
-        <a href="https://www.github.com/lirolake" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/lirolake" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a href="mailto:lirolake@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
-        <p><i class="fab fa-discord"></i>&nbsp;lirolake#4592</p>
+      .sm {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+      }
+      .sm a {
+        color: #f2f2f2;
+        width: 56px;
+        font-size: 22px;
+        transition: .3s linear;
+      }
+      .sm a:hover {
+        color: #e66767;
+      }
+      .contact-btn {
+        display: inline-block;
+        padding: 10px 50px;
+        color: #e66767;
+        border: 2px solid #e66767;
+        border-radius: 6px;
+        margin: 20px 0 0;
+        width: 210px;
+      }
+      .contact-btn:hover {
+        background: #e66767;
+        color: #f2f2f2;
+      }
+      .card-footer {
+        background: #f4f4f4;
+        padding: 60px 10px;
+      }
+      .numbers {
+        display: flex;
+        align-items: center;
+      }
+      .item {
+        flex: 1;
+        text-transform: uppercase;
+        font-size: 13px;
+        color: #e66767;
+      }
+      .item span {
+        display: block;
+        color: #2c3a47;
+        font-size: 30px;
+      }
+      .border {
+        width: 1px;
+        height: 30px;
+        background: #bbb;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="profile-card">
+      <div class="card-header">
+        <div class="pic">
+          <img src="img.png">
+        </div>
+        <div class="name">Liam "lirolake"</div>
+        <a href="https://www.statuseffect.co/" target="_blank" class="desc">Technology Director<br />Status Effect</a>
+        <br /><br />
+        <a href="https://www.southwales.ac.uk/" target="_blank" class="desc">First Class BSc (Hons) Computer Security<br />University of South Wales</a>
+        <br /><br />
+        <div class="sm">
+          <a href="https://www.linkedin.com/in/lirolake" target="_blank" class="fab fa-linkedin"></a>
+          <a href="https://www.twitter.com/lirolake" target="_blank" class="fab fa-twitter"></a>
+          <a href="https://www.statuseffect.co/discord" target="_blank" class="fab fa-discord"></a>
+          <a href="https://www.github.com/lirolake" target="_blank" class="fab fa-github"></a>
+        </div>
+        <a href="Liam-lirolake-Resume.pdf" target="_blank" class="contact-btn">View Resume</a>
+        <br />
+        <a href="mailto:lirolake@gmail.com" class="contact-btn">Email Me</a>
       </div>
-      <p class="text-white">Currently in the process of updating the website.<br />Please check back later</p>
-  </header>
-  <footer id="footer">
-    &copy; 2020 Copyright <strong><span>Liam "lirolake"</span></strong> - All Rights Reserved
-  </footer>
-  <script src="assets/vendor/jquery/jquery.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-</body>
+    </div>
+  </body>
 </html>
