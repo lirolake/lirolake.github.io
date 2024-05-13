@@ -131,6 +131,7 @@ body {
   font-family: var(--font-primary);
   color: var(--color-body);
   font-weight: var(--p-regular);
+  background-color: #1D1E24;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   body {
@@ -11391,6 +11392,9 @@ body.template-color-1 {
 /*--------------------------
     Navigation Styles
 ----------------------------*/
+.bot-navbar {
+  margin: 0 0 10px;
+}
 .mainmenu-nav .primary-menu {
   display: flex;
   list-style: none;
@@ -11585,9 +11589,7 @@ body.template-color-1 {
 }
 
 .social-share-style-1 {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 20px;
-  margin-top: 100px !important;
 }
 
 .social-share-style-1 .social-share li {
