@@ -17380,6 +17380,7 @@ span.sr-only {
   height: 100%;
   transition: 0.5s all ease-in-out;
   display: inline-block;
+  cursor: pointer;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .rn-portfolio,
