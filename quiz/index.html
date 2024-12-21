@@ -96,7 +96,7 @@
       <div class="row" id="end">
         <div class="col-10 offset-1 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
           <h2>Thank you for playing</h2>
-          <p>If you have any feedback, please speak with <a href="https://lirolake.com" target="_blank">@lirolake</a></p>
+          <p>If you have any feedback, please speak to <a href="https://lirolake.com" target="_blank">lirolake</a></p>
           <table class="table table-striped table-hover">
             <thead>
               <tr>
@@ -104,8 +104,7 @@
                 <th>Score</th>
               </tr>
             </thead>
-            <tbody id="scoreboard">
-            </tbody>
+            <tbody id="scoreboard"></tbody>
           </table>
           <button onclick="javascript:resetForm();" class="btn btn-outline-light my-3">Exit</button>
         </div>
@@ -117,6 +116,7 @@
     let userToken;
     let reconnectAttempts = 0;
     let connectedBefore = false;
+    let sessionEnded = false;
     function setCookie(cname, cvalue, exdays) {
       const d = new Date();
       d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -210,8 +210,10 @@
             document.getElementById('answer').style.display = "block";
             document.getElementById('answer').textContent = "You Submitted: "+data.value;
           } else if (data.type == "end") {
+            sessionEnded = true;
             document.getElementById('end').style.display = "flex";
             document.getElementById('game-menu').style.display = "none";
+            document.getElementById('scoreboard').innerHTML = "";
             Object.entries(data.scores).forEach(([key, value]) => {
               if (getCookie('token') == key) {
                 document.getElementById('scoreboard').innerHTML += '<tr class="table-success"><td>'+value.username+' (You)</td><td>'+value.score+'</td></tr>';
@@ -222,26 +224,28 @@
           }
         });
         socket.addEventListener('close', function() {
-          if (userToken && connectedBefore) {
-            document.getElementById('loader-header').textContent = "Disconnected";
-            document.getElementById('roomcode-form').style.display = "none";
-            document.getElementById('loader').style.display = "block";
-            document.getElementById('game-menu').style.display = "none";
-            document.getElementById('error-alert').style.display = "none";
-            reconnectAttempts++;
-            retryTime = Math.min(1000*(2**reconnectAttempts), 15000);
-            document.getElementById('loader-text').textContent = "Retrying in "+(retryTime/1000)+" seconds";
-            setTimeout(joinGame, retryTime);
-          } else {
-            setCookie('token','',0);
-            document.getElementById('roomcode-form').style.display = "flex";
-            document.getElementById('loader').style.display = "none";
-            document.getElementById('game-menu').style.display = "none";
-            document.getElementById('error-alert').style.display = "block";
-            document.getElementById('room-code').value = "";
-            document.getElementById('room-code').removeAttribute('disabled');
-            document.getElementById('username-text').textContent = "";
-            document.getElementById('error-message').textContent = "Failed to Connect to the Server";
+          if (!sessionEnded) {
+            if (userToken && connectedBefore) {
+              document.getElementById('loader-header').textContent = "Disconnected";
+              document.getElementById('roomcode-form').style.display = "none";
+              document.getElementById('loader').style.display = "block";
+              document.getElementById('game-menu').style.display = "none";
+              document.getElementById('error-alert').style.display = "none";
+              reconnectAttempts++;
+              retryTime = Math.min(1000*(2**reconnectAttempts), 15000);
+              document.getElementById('loader-text').textContent = "Retrying in "+(retryTime/1000)+" seconds";
+              setTimeout(joinGame, retryTime);
+            } else {
+              setCookie('token','',0);
+              document.getElementById('roomcode-form').style.display = "flex";
+              document.getElementById('loader').style.display = "none";
+              document.getElementById('game-menu').style.display = "none";
+              document.getElementById('error-alert').style.display = "block";
+              document.getElementById('room-code').value = "";
+              document.getElementById('room-code').removeAttribute('disabled');
+              document.getElementById('username-text').textContent = "";
+              document.getElementById('error-message').textContent = "Failed to Connect to the Server";
+            }
           }
         });
       } else {
