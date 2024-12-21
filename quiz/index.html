@@ -87,7 +87,7 @@
       </div>
       <div class="row text-center" id="game-menu">
         <div class="col-12">
-          <h2 id="question">Starting Soon</h2>
+          <h2 id="question"></h2>
           <div id="buttons" class="mt-5">
           </div>
           <p id="answer"></p>
@@ -154,7 +154,10 @@
         document.getElementById('game-menu').style.display = "none";
         document.getElementById('loader-header').textContent = "Connecting...";
         document.getElementById('loader-text').textContent = "";
-        socket = new WebSocket("ws://websocket-server.ddns.net");
+        document.getElementById('question').textContent = "Starting Soon";
+        document.getElementById('buttons').innerHTML = "";
+        document.getElementById('answer').innerHTML = "";
+        socket = new WebSocket("ws://wss.lirolake.com");
         socket.addEventListener('open', function() {
           if (userToken) {
             socket.send(JSON.stringify({type:'reconnect',token:userToken,username:document.getElementById('username').value}));
@@ -216,7 +219,7 @@
             document.getElementById('game-menu').style.display = "none";
             document.getElementById('scoreboard').innerHTML = "";
             Object.entries(data.scores).forEach(([key, value]) => {
-              if (getCookie('token') == key) {
+              if (userToken == key) {
                 document.getElementById('scoreboard').innerHTML += '<tr class="table-success"><td>'+value.username+' (You)</td><td>'+value.score+'</td></tr>';
               } else {
                 document.getElementById('scoreboard').innerHTML += '<tr><td>'+value.username+'</td><td>'+value.score+'</td></tr>';
