@@ -157,7 +157,7 @@
         document.getElementById('question').textContent = "Starting Soon";
         document.getElementById('buttons').innerHTML = "";
         document.getElementById('answer').innerHTML = "";
-        socket = new WebSocket("ws://wss.lirolake.com");
+        socket = new WebSocket("wss://ws.lirolake.com");
         socket.addEventListener('open', function() {
           if (userToken) {
             socket.send(JSON.stringify({type:'reconnect',token:userToken,username:document.getElementById('username').value}));
