@@ -138,8 +138,7 @@
     }
     if (getCookie("token")) {
       userToken = getCookie("token");
-      document.getElementById('room-code').setAttribute('disabled','disabled');
-      document.getElementById('room-code').value = "Using Previous Connection";
+      joinGame();
     }
     function resetForm() {
       setCookie('token','',1);
@@ -185,8 +184,6 @@
               document.getElementById('error-alert').style.display = "block";
               document.getElementById('loader').style.display = "none";
               document.getElementById('game-menu').style.display = "none";
-              document.getElementById('room-code').value = "";
-              document.getElementById('room-code').removeAttribute('disabled');
               document.getElementById('error-message').textContent = data.reason;
             }
           } else if (data.type == "reconnect") {
@@ -269,8 +266,6 @@
               document.getElementById('loader').style.display = "none";
               document.getElementById('game-menu').style.display = "none";
               document.getElementById('error-alert').style.display = "block";
-              document.getElementById('room-code').value = "";
-              document.getElementById('room-code').removeAttribute('disabled');
               document.getElementById('username-text').textContent = "";
               document.getElementById('error-message').textContent = "Failed to Connect to the Server";
             }
