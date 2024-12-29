@@ -145,7 +145,7 @@
       window.location.reload();
     }
     function joinGame() {
-      if (document.getElementById('username').value) {
+      if (userToken || document.getElementById('username').value) {
         document.getElementById('roomcode-form').style.display = "none";
         document.getElementById('error-alert').style.display = "none";
         document.getElementById('loader').style.display = "block";
