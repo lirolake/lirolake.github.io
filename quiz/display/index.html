@@ -36,7 +36,6 @@
       });
       socket.addEventListener('message', function(event) {
         const data = JSON.parse(event.data);
-        console.log(data);
         if (data.type == "handshake") {
           document.getElementById('room-code').textContent = "Room Code: "+data.roomcode;
         } else if (data.type == "question") {

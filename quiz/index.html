@@ -166,7 +166,6 @@
         socket.addEventListener('message', function(event) {
           connectedBefore = true;
           const data = JSON.parse(event.data);
-          console.log(data);
           if (data.type == "handshake") {
             if (data.result == "success") {
               userToken = data.token;
@@ -247,11 +246,8 @@
           }
         });
         socket.addEventListener('close', function() {
-          console.log('Close');
           if (!sessionEnded) {
-            console.log('!sessionEnded');
             if (userToken && connectedBefore) {
-              console.log('userToken && connectedBefore');
               document.getElementById('loader-header').textContent = "Disconnected";
               document.getElementById('roomcode-form').style.display = "none";
               document.getElementById('loader').style.display = "block";
@@ -260,7 +256,6 @@
               document.getElementById('loader-text').textContent = "Retrying in 10 seconds";
               setTimeout(joinGame, 10000);
             } else {
-              console.log('else');
               setCookie('token','',0);
               document.getElementById('roomcode-form').style.display = "flex";
               document.getElementById('loader').style.display = "none";
@@ -272,7 +267,6 @@
           }
         });
       } else {
-        console.log('No username');
         document.getElementById('username-text').textContent = "";
         document.getElementById('roomcode-form').style.display = "flex";
         document.getElementById('loader').style.display = "none";

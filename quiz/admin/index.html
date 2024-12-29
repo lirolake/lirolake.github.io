@@ -93,7 +93,6 @@
         });
         socket.addEventListener('message', function(event) {
           const data = JSON.parse(event.data);
-          console.log(data);
           if (data.type == "handshake") {
             if (data.result == "success") {
               document.getElementById('loader').style.display = "none";
