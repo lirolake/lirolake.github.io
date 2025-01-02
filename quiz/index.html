@@ -84,20 +84,10 @@
         grid-template-columns: repeat(1, 1fr);
         gap: 10px;
       }
-      #timer {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        align-items: center;
-        justify-content: center;
-      }
       #username-text {
         position: absolute;
         top: 20px;
-        left: 20px;
+        right: 20px;
       }
       #game-menu,
       #end-menu,
@@ -106,7 +96,7 @@
       }
       #question {
         font-size: 1.2rem;
-        margin: 20px 0;
+        margin: 40px 0 20px;
         text-align: center;
       }
       #question img {
@@ -127,6 +117,33 @@
         display: grid;
         grid-template-columns: repeat(1, 1fr);
         gap: 10px;
+      }
+      #timer {
+        width: 100%;
+        height: 25px;
+        background-color: rgba(0,0,0,0.2);
+        border-radius: 20px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
+      }
+      #timer-fill {
+        width: 77%;
+        height: 100%;
+        background: #ff6f61;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+      #countdownNumber {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
       }
       button {
         background: #ff6f61;
@@ -186,11 +203,12 @@
         <p>Built by <a href="/" target="_blank">lirolake</a></p>
       </div>
       <div id="game-menu">
-        <div id="timer" style="display:none;background:conic-gradient(#ff6f61 0, #37474f 0)">
-          <span id="countdownNumber"></span>
-        </div>
         <div id="username-text"></div>
         <div id="question"></div>
+        <div id="timer" style="display:none;">
+          <div id="timer-fill"></div>
+          <div id="countdownNumber"></div>
+        </div>
         <div id="buttons-container"></div>
         <div id="answer"></div>
       </div>
@@ -310,13 +328,13 @@
               alreadyAnswered = true;
               document.getElementById('buttons-container').innerHTML = "";
               document.getElementById('timer').style.display = "none";
-              document.getElementById('timer').style.background = `conic-gradient(#ff6f61 0, #37474f 0)`;
               document.getElementById('answer').style.display = "block";
               document.getElementById('answer').textContent = "Your Answer: "+data.answer;
             } else if (data.type == "countdown") {
               if (!alreadyAnswered) {
-                document.getElementById('timer').style.display = "flex";
-                document.getElementById('countdownNumber').textContent = "15";
+                document.getElementById('timer').style.display = "block";
+                document.getElementById('countdownNumber').textContent = "You have 15 seconds left";
+                document.getElementById('timer-fill').style.width = "0%";
                 let countdownTimer = 15;
                 let progress = 0;
                 const countdownInterval = setInterval(function() {
@@ -324,15 +342,14 @@
                   if (alreadyAnswered) {
                     clearInterval(countdownInterval);
                     document.getElementById('timer').style.display = "none";
-                    document.getElementById('timer').style.background = `conic-gradient(#ff6f61 0, #37474f 0)`;
                   } else {
-                    document.getElementById('countdownNumber').textContent = countdownTimer;
-                    document.getElementById('timer').style.background = `conic-gradient(#ff6f61 ${progress}%, #37474f 0)`;
+                    document.getElementById('timer').style.display = "block";
+                    document.getElementById('timer-fill').style.width = progress+"%";
+                    document.getElementById('countdownNumber').textContent = "You have "+countdownTimer+" seconds left";
                     if (countdownTimer <= 0) {
                       clearInterval(countdownInterval);
                       document.getElementById('buttons-container').innerHTML = "";
                       document.getElementById('timer').style.display = "none";
-                      document.getElementById('timer').style.background = `conic-gradient(#ff6f61 0, #37474f 0)`;
                       document.getElementById('answer').style.display = "block";
                       document.getElementById('answer').textContent = "You did not answer in time!";
                     }
